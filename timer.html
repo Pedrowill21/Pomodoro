@@ -200,9 +200,9 @@
             var entrada = document.getElementById('valorDigitado').disabled = true;
             var btn = document.getElementById('btn').style.display = 'none'
             tempoLimite = tempoLimite * 60;
-            var segundo = 00;
-            var minuto = 00;
-            var hora =00;
+            var segundo = 0;
+            var minuto = 0;
+            var hora =0;
             var ampolieta = 0;
             document.getElementById('hora').innerText= hora;
             let contador = setInterval(function(){
@@ -240,7 +240,7 @@
 
 
 
-            }, 1000)
+            }, 0.1)
 
 
         }
