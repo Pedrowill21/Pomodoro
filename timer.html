@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro</title>
+    <style>
+
+     
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #422343;
+            color: #ea284b;
+        }
+
+        h3{
+            font-size: 10px;
+            font-weight: 200;
+        }
+
+        
+
+        #container{
+            background-color: #7f1e47;
+            width: 1080px;
+            display: flex;
+            padding: 20px;
+            margin-top: 200px;
+            border-radius: 20px;
+            
+        }
+
+        #menu{
+            width: 520px;
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1{
+            font-size: 50px;
+            margin: 0 0 5px 0;
+            color: #fb0230;
+        }
+        h2{
+            margin: 0;
+            font-size: 23px;
+            color: #ff6581;
+        }
+
+        #menu p {
+            color: #ff6581;
+            font-size: 18px;
+            margin: 10px 0px;
+        }
+
+        #controlador{
+            width: 530px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #controlador button{
+            width: 120px;
+            margin: 20px 0px 0 0;
+            height: 30px;
+            border-radius: 10px;
+            background-color: #ffc803;
+            outline: none;
+            border: none;
+            color: white;
+
+        }
+
+        #controlador button:hover{
+            box-shadow: 1px 1px 4px 3px #c0fa00;
+        }
+
+        #controlador input{
+            width: 200px;
+            height: 30px;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 10px;
+            border: none;
+            color: #ff6581;
+        }
+
+        #controlador input:focus{
+            outline: none;
+            
+        }
+
+        #controlador input:disabled{
+            background-color: #319190;
+            color: white;
+    
+        }
+
+        #saida{
+            width: 480px;
+            height: 200px;
+            background-color: #ffefb5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-sizing: border-box;
+
+        }
+
+        #saida span{
+            margin: 0 10px;
+            font-size: 50px;
+        }
+        .box{
+            width: 150px ;
+            height: 130px;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #saida h3 {
+            color: #ff4000;
+            font-size: 25px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div id="container">
+
+        <div id="menu">
+            <h1>Pomodoro</h1>
+            <h2>O aliado <strong>perfeito</strong> para manter o <strong>foco</strong> nos estudos!</h2>
+            <p>Como estudante em busca de um maior rendimento acadêmico, sempre me vi lutando contra a procrastinação e a dificuldade em manter o foco durante longos períodos de estudo. No entanto, desde que descobri o Método Pomodoro, minha produtividade e concentração nas tarefas melhoraram significativamente.</p>
+            <p>O Método Pomodoro é uma técnica de gerenciamento de tempo que ajuda a manter o foco nos estudos. Consiste em dividir o tempo em intervalos de 25 minutos chamados de "pomodoros", seguidos por pausas curtas de 5 minutos. Após quatro pomodoros, é recomendada uma pausa mais longa.
+
+                Essa abordagem simples ajuda a combater a procrastinação, pois estabelece um cronograma claro e divide as tarefas em blocos gerenciáveis. A limitação de tempo encoraja a aproveitar cada momento, evitando distrações. As pausas curtas permitem descansar a mente e o corpo, evitando fadiga.
+                
+                O Método Pomodoro ensina a estabelecer prioridades e definir metas realistas para cada pomodoro, otimizando o tempo de estudo. Embora exija disciplina, com o tempo e a prática, torna-se um hábito natural. É uma ferramenta eficaz para aumentar a concentração e a produtividade nos estudos.</p>
+        </div>
+
+        <div id="controlador">
+            <input type="number"  id="valorDigitado" placeholder="25" value="25">
+            <button onclick="timer()" id="btn">Start</button>
+
+            <div id="saida">
+
+                <div class="box">
+                    <h3>Hora</h3>
+                    <span id="hora">00</span>
+        
+                </div>
+        
+                <div class="box">
+                    <h3>Minuto</h3>
+                    <span id="minuto">00</span>
+        
+                </div>
+        
+                <div class="box">
+                    <h3>Segundos</h3>
+                    <span id="segundos">00</span>
+                </div>
+           
+            </div>
+    </div>
+
+   
+
+    </div>
+
+   
+
+
+    <script>
+
+
+        
+
+        function timer(){
+            document.body.style.background = ''
+            document.getElementById('saida').style.border= "none"
+            var tempoLimite = document.getElementById('valorDigitado').value
+            var entrada = document.getElementById('valorDigitado').disabled = true;
+            var btn = document.getElementById('btn').style.display = 'none'
+            tempoLimite = tempoLimite * 60;
+            var segundo = 00;
+            var minuto = 00;
+            var hora =00;
+            var ampolieta = 0;
+            document.getElementById('hora').innerText= hora;
+            let contador = setInterval(function(){
+                segundo ++;
+                ampolieta ++;
+                document.getElementById('segundos').innerText= segundo;
+                console.log(segundo)
+                console.log(ampolieta);
+
+                if( segundo == 60 ){
+                    segundo = 0;
+                    minuto ++
+                    document.getElementById('minuto').innerText= minuto;
+                    document.getElementById('segundos').innerText= segundo;
+                    
+                }
+
+                if( minuto == 60 ){
+                    minuto = 0;
+                    hora ++;
+                    document.getElementById('minuto').innerText= minuto;
+                    document.getElementById('hora').innerText= hora;
+                    
+                }
+               
+               
+                
+                if( ampolieta == tempoLimite ){
+                    document.getElementById('saida').style.border= "2px solid red"
+                    clearInterval(contador)
+                    var entrada = document.getElementById('valorDigitado').disabled = false;
+                    var btn = document.getElementById('btn').style.display = 'block'
+                    
+                }
+
+
+
+            }, 0.2)
+
+
+        }
+
+            document.addEventListener("keydown", function(event){
+
+            if(event.key === "Enter"){
+
+                timer()
+        
+            }
+            })
+
+    </script>
+</body>
+</html> 
