@@ -70,7 +70,7 @@
 
         #controlador button{
             width: 120px;
-            margin: 20px 0px 0 0;
+            margin: 20px 5px;
             height: 30px;
             border-radius: 10px;
             background-color: #ffc803;
@@ -103,6 +103,11 @@
             background-color: #319190;
             color: white;
     
+        }
+
+        #controlador div {
+            display: flex;
+            margin: 0;
         }
 
         #saida{
@@ -157,7 +162,11 @@
 
         <div id="controlador">
             <input type="number"  id="valorDigitado" placeholder="25" value="25">
-            <button onclick="timer()" id="btn">Start</button>
+            <div>
+                <button onclick="timer()" id="btn">Start</button>
+                <button onclick="limpar()">Cancelar</button>
+            </div>
+         
 
             <div id="saida">
 
@@ -190,10 +199,12 @@
 
     <script>
 
+        function limpar (){
+                window.location.reload()
+            }
 
-        
-
-        function timer(){
+        function timer(a){
+            document.getElementById('saida').style.background = "#ffefb5";
             document.body.style.background = ''
             document.getElementById('saida').style.border= "none"
             var tempoLimite = document.getElementById('valorDigitado').value
@@ -207,6 +218,7 @@
             document.getElementById('hora').innerText= hora;
             document.getElementById('minuto').innerText= minuto;
             document.getElementById('segundos').innerText= segundo;
+
             let contador = setInterval(function(){
                 segundo ++;
                 ampolieta ++;
@@ -233,16 +245,20 @@
                
                 
                 if( ampolieta == tempoLimite ){
-                    document.getElementById('saida').style.border= "2px solid red"
+                    if( tempoLimite == 300){
+                        document.getElementById('valorDigitado').value = 25;
+                        document.getElementById('saida').style.background = "#ffefb5"
+                    } else{
+                        document.getElementById('valorDigitado').value = 5;
+                        document.getElementById('saida').style.background = "#acffe9"
+                    }
                     clearInterval(contador)
                     var entrada = document.getElementById('valorDigitado').disabled = false;
                     var btn = document.getElementById('btn').style.display = 'block'
                     
                 }
 
-
-
-            }, 10)
+            }, 0.05 )
 
 
         }
@@ -255,6 +271,8 @@
         
             }
             })
+
+            
 
     </script>
 </body>
