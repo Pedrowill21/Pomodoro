@@ -13,8 +13,8 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            background-color: #422343;
-            color: #ea284b;
+            background-color: #2b1a2b;
+            color: #669ad5;
         }
 
         h3{
@@ -25,7 +25,7 @@
         
 
         #container{
-            background-color: #7f1e47;
+            background-color: #22122d;
             width: 1080px;
             display: flex;
             padding: 20px;
@@ -46,16 +46,16 @@
         h1{
             font-size: 50px;
             margin: 0 0 5px 0;
-            color: #fb0230;
+            color: #5bb2ff;
         }
         h2{
             margin: 0;
             font-size: 23px;
-            color: #ff6581;
+            color: #80b3e0;
         }
 
         #menu p {
-            color: #ff6581;
+            color: #80b3e0;
             font-size: 18px;
             margin: 10px 0px;
         }
@@ -73,15 +73,16 @@
             margin: 20px 5px;
             height: 30px;
             border-radius: 10px;
-            background-color: #ffc803;
+            background-color: #36a840;
             outline: none;
             border: none;
             color: white;
 
         }
 
-        #controlador button:hover{
-            box-shadow: 1px 1px 4px 3px #c0fa00;
+        #controlador button:active{
+            background-color: #80b3e0;
+            color: black;
         }
 
         #controlador input{
@@ -91,7 +92,7 @@
             font-size: 20px;
             border-radius: 10px;
             border: none;
-            color: #ff6581;
+            color: #2f44ff;
         }
 
         #controlador input:focus{
@@ -113,7 +114,7 @@
         #saida{
             width: 480px;
             height: 200px;
-            background-color: #ffefb5;
+            background-color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -138,7 +139,7 @@
         }
 
         #saida h3 {
-            color: #ff4000;
+            color: #669ad5;
             font-size: 25px;
         }
 
@@ -161,10 +162,12 @@
         </div>
 
         <div id="controlador">
-            <input type="number"  id="valorDigitado" placeholder="25" value="25">
+            <input type="number"  id="valorDigitado" placeholder="25" value="25" maxlength="59">
             <div>
-                <button onclick="timer()" id="btn">Start</button>
-                <button onclick="limpar()">Cancelar</button>
+                <button onclick="Start()" id="btn">Start</button>
+                <button onclick="Pausar()">Pausar</button>
+                <button onclick="Reiniciar()">Reiniciar</button>
+                <audio src="despertador.mp3" id="audio"></audio>
             </div>
          
 
@@ -199,75 +202,74 @@
 
     <script>
 
-        function limpar (){
-                window.location.reload()
+        let hora = document.getElementById('hora');
+        let minuto = document.getElementById('minuto');
+        let segundo = document.getElementById('segundos');
+        let cromometro = '';
+        let chave = true;
+        let tempoLimite = document.getElementById('valorDigitado').value;
+
+        function Start(){
+            tempoLimite = document.getElementById('valorDigitado').value;
+            if(tempoLimite > 59){
+                document.getElementById('valorDigitado').style.background = 'red';
+                chave = false;
+            }
+            
+
+            
+
+            if(chave == true){
+                cromometro = setInterval(function(){
+            segundos.innerHTML ++;
+
+            if(segundos.innerHTML == 60){
+                minuto.innerHTML ++;
+                segundos.innerHTML = 0;
+                chave = false;
             }
 
-        function timer(a){
-            document.getElementById('saida').style.background = "#ffefb5";
-            document.body.style.background = ''
-            document.getElementById('saida').style.border= "none"
-            var tempoLimite = document.getElementById('valorDigitado').value
-            var entrada = document.getElementById('valorDigitado').disabled = true;
-            var btn = document.getElementById('btn').style.display = 'none'
-            tempoLimite = tempoLimite * 60;
-            var segundo = 0;
-            var minuto = 0;
-            var hora =0;
-            var ampolieta = 0;
-            document.getElementById('hora').innerText= hora;
-            document.getElementById('minuto').innerText= minuto;
-            document.getElementById('segundos').innerText= segundo;
+            if(tempoLimite == minuto.innerHTML){
+                Pausar();
+                document.getElementById('audio').play()
 
-            let contador = setInterval(function(){
-                segundo ++;
-                ampolieta ++;
-                document.getElementById('segundos').innerText= segundo;
-                console.log(segundo)
-                console.log(ampolieta);
+            }
 
-                if( segundo == 60 ){
-                    segundo = 0;
-                    minuto ++
-                    document.getElementById('minuto').innerText= minuto;
-                    document.getElementById('segundos').innerText= segundo;
-                    
-                }
+            if(minuto.innerHTML == 60){
+                hora.innerHTML ++;
+                minuto.innerHTML = 0;
 
-                if( minuto == 60 ){
-                    minuto = 0;
-                    hora ++;
-                    document.getElementById('minuto').innerText= minuto;
-                    document.getElementById('hora').innerText= hora;
-                    
-                }
-               
-               
-                
-                if( ampolieta == tempoLimite ){
-                    if( tempoLimite == 300){
-                        document.getElementById('valorDigitado').value = 25;
-                        document.getElementById('saida').style.background = "#ffefb5"
-                    } else{
-                        document.getElementById('valorDigitado').value = 5;
-                        document.getElementById('saida').style.background = "#acffe9"
-                    }
-                    clearInterval(contador)
-                    var entrada = document.getElementById('valorDigitado').disabled = false;
-                    var btn = document.getElementById('btn').style.display = 'block'
-                    
-                }
+            }
 
-            }, 0.05 )
+        
 
+
+        },10);
+            }
+          
 
         }
+
+        function Pausar(){
+            chave =true;
+            clearInterval(cromometro)
+        }
+
+        function Reiniciar(){
+            window.location.reload()
+            segundo.innerHTML = 0;
+            minuto.innerHTML = 0;
+            hora.innerHTML = 0;
+        }
+
+        
+
 
             document.addEventListener("keydown", function(event){
 
             if(event.key === "Enter"){
 
-                timer()
+                Start()
         
             }
             })
